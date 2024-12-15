@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/league of legends.ico">
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <script type="module" src="js/index.js" defer></script>
+    <title>League of Legends Champions</title>
+</head>
+<body>
+  <div id="background-image"></div>
+  <div class="content">
+    <div id="banner-image"></div>
+    <div id="champions-container"></div>
+  </div>
+  <!-- Modal con informacion del campeon seleccionado -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <!-- Icono de campeon en el modal -->
+      <div id="champion-icon"></div>
+      <!-- Boton de cerrar modal -->
+      <span id="close-modal" class="close-btn">&times;</span>
+      <div class="scroll-wrapper">
+        <div id="modal-body">
+          <!-- Apartado del nombre -->
+          <h2 id="champion-name" style="font-family: 'FrizQuadrataBold';">Nombre del Campeón</h2>
+          <!-- Apartado del titulo -->
+          <p id="champion-title" style="font-family: 'FrizQuadrataItalic';">Título del campeón</p>
+          <!-- Apartado del lore -->
+          <h3 id="lore-title">Lore</h3>
+          <p id="champion-info" style="font-family: 'FrizQuadrataStdMedium';">Información del campeón</p>
+          <!-- Apartado de consejos de aliados -->
+          <h3 id="ally-tips-title">Consejos de aliados</h3>
+          <p id="champion-ally-tips" style="font-family: 'FrizQuadrataStdMedium';">Consejos de aliados del campeón</p>
+          <!-- Apartado de consejos de enemigos -->
+          <h3 id="enemy-tips-title">Consejos de enemigos</h3>
+          <p id="champion-enemy-tips" style="font-family: 'FrizQuadrataStdMedium';">Consejos de enemigos del campeón</p>
+          <!-- Carrusel de imágenes de las skins del campeón -->
+          <div class="champion-skins">
+            <button class="carousel-button left">&lt;</button>
+            <div id="skins-container">
+            </div>
+            <button class="carousel-button right">&gt;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

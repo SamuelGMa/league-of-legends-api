@@ -1,0 +1,346 @@
+
+/* Selector de etiquetas html y body para ocupar toda la ventana y establecer el cursor personalizado */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: url('../assets/cursors/Summoner/normal.cur'), auto;
+}
+
+/* Selector de la imagen de fondo */
+#background-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    /* Tamaño aumentado para evitar bordes visibles de la imagen con el efecto de seguimiento del cursor*/
+    min-width: 120%;
+    min-height: 120%;
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Fondo detrás del contenido */
+    background: url('../assets/background-image.jpg') no-repeat center center; /* Imagen de fondo */
+    background-size: cover;
+}
+
+/* Selector del banner superior de la ventana con el logo del Lol */
+#banner-image {
+    width: 100%;
+    height: 350px;
+    background: url('../assets/banner-image.png') no-repeat center center;
+    background-size: contain; 
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+/* Contenedor de los campeones */
+#champions-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 tarjetas de campeon por fila */
+    gap: 50px; /* Espacio entre cada tarjeta */
+    padding: 20px; /* Espacio alrededor del contenedor */
+}
+
+/* Selector para la disposición de las tarjetas */
+.champion-card {
+    width: 100%;
+    padding-top: 66%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    background-color: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    box-sizing: border-box;
+    cursor: url('../assets/cursors/Summoner/crosshair.cur'), auto;
+}
+
+/* Selector de hover de tarjeta para ampliar tarjeta al activarse */
+.champion-card:hover {
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+/* Fondo de la tarjeta (imagen del campeón) */
+.champion-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Nombre del campeón superpuesto sobre la imagen */
+.champion-name {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'FrizQuadrataRegular', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+}
+
+/* Fuente personalizada FrizQuadrataRegular */
+@font-face {
+    font-family: 'FrizQuadrataRegular';
+    src: url('../assets/fonts/friz-quadrata-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Fuente personalizada FrizQuadrataBold */
+@font-face {
+    font-family: 'FrizQuadrataBold';
+    src: url('../assets/fonts/friz-quadrata-bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Fuente personalizada FrizQuadrataItalic */
+@font-face {
+    font-family: 'FrizQuadrataItalic';
+    src: url('../assets/fonts/friz-quadrata-italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Fuente personalizada FrizQuadrataStdMedium */
+@font-face {
+    font-family: 'FrizQuadrataStdMedium';
+    src: url('../assets/fonts/friz-quadrata-std-medium.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Métodos adaptativos al tamaño de la ventana web */
+
+/* Cuando la pantalla sea más pequeña que 1400px, cambia a 3 columnas */
+@media (max-width: 1400px) {
+    #champions-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    }
+}
+
+
+/* Cuando la pantalla sea más pequeña que 1150px, cambia a 2 columnas */
+@media (max-width: 1150px) {
+    #champions-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    }
+}
+
+/* Cuando la pantalla sea más pequeña que 850px, cambia a 1 columna */
+@media (max-width: 850px) {
+    #champions-container {
+        grid-template-columns: repeat(1, 1fr); /* 1 columna */
+    }
+}
+
+/* Cuando la pantalla sea más pequeña que 450px, se ocultan los campeones */
+@media (max-width: 450px) {
+    #champions-container {
+        display: none; /* Oculta completamente el contenedor */
+    }
+}
+
+/* Selector de la envoltura de la barra de desplazamiento del modal */
+.scroll-wrapper {
+    overflow: hidden; /* Oculta las barras */
+    width: 100%;
+}
+
+/* Selector del contenedor del modal */
+.modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/*  Selector del contenido del modal */
+.modal-content {
+    color: #B56E17;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 1240px;
+    max-height: 90%;
+    overflow-y: auto;
+    height: auto;
+    position: relative;
+    text-align: center;
+}
+
+/* Selector del boton de cierre del modal */
+.close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 70px;
+    font-weight: bold;
+    cursor: url('../assets/cursors/Summoner/vert.cur'), auto;
+    z-index: 1001;
+}
+
+/* Selector de webKit para ocultar la barra de scroll en el modal  */
+.modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Estilo para el contenido dentro del modal */
+#modal-body {
+    margin-top: 20px;
+}
+
+/* Asegurar que el contenido del modal se vea bien */
+#champion-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Selector del apartado de titulo del campeon en el modal */
+#champion-title {
+    font-size: 24px;
+    color: #cecece;
+}
+
+/* Selector del apartado de lore del campeon en el modal */
+#champion-info {
+    font-size: 16px;
+    color: #adadad;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+/* Selector del apartado de consejos de aliados del campeon en el modal */
+#champion-ally-tips {
+    font-size: 16px;
+    color: #adadad;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+/* Selector del apartado de consejos de enemigos del campeon en el modal */
+#champion-enemy-tips {
+    font-size: 16px;
+    color: #adadad;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#lore-title {
+    padding-top: 5%;
+    font-family: 'FrizQuadrataBold'; 
+    color: #adadad;
+}
+
+#ally-tips-title {
+    padding-top: 5%;
+    font-family: 'FrizQuadrataBold'; 
+    color: #adadad;
+}
+
+#enemy-tips-title {
+    padding-top: 5%;
+    font-family: 'FrizQuadrataBold'; 
+    color: #adadad;
+}
+
+/* Selector del icono de campeon en el modal */
+#champion-icon {
+    position: sticky;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 2px solid #B56E17;
+}
+
+/* Selector del apartado de skins del campeon en el modal */
+.champion-skins {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+    position: relative;
+    padding-top: 5%;
+}
+
+/* Selector del contenedor de skins del campeon en el modal */
+#skins-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+}
+
+/* Selector de imagen de skin individual en el carrusel del modal */
+.skin-image {
+    width: 400px;
+    height: 224px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Selector de imagen hover para cambiar el cursor */
+.skin-image:hover {
+    cursor: url('../assets/cursors/Summoner/alt.cur'), auto;
+}
+
+/* Selector del carrusel de imagenes */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: url('../assets/cursors/Summoner/vert.cur'), auto;
+    z-index: 10;
+}
+
+/* Selector del boton de deslizar izquierdo del carrusel de imagenes */
+.carousel-button.left {
+    left: 10px;
+}
+
+/* Selector del boton de deslizar derecho del carrusel de imagenes */
+.carousel-button.right {
+    right: 10px;
+}
