@@ -2,7 +2,7 @@
   "name": "league-of-lengends-api",
   "version": "1.0.0",
   "description": "Actividad. League of Legends - API - DEW - Unidad de Trabajo 7",
-  "main": "src/js/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel serve -d dist src/index.html",
